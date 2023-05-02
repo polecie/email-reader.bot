@@ -1,0 +1,56 @@
+version: '3.9'
+
+services:
+  mail_sender_app:
+    container_name: mail_sender_app
+    build:
+      context: .
+      dockerfile: ${EMAIL_SENDER_DIR}/Dockerfile
+    command: make run_django_tests
+    env_file:
+      - ./${ENV_FILENAME}
+    networks:
+      - mail_sender_network
+    ports:
+      - "8000:8000"
+    depends_on:
+      mail_sender_postgres_db:
+        condition: service_healthy
+
+  mail_sender_postgres_db:
+    container_name: mail_sender_postgres_db
+    image: postgres:15.1-alpine
+    volumes:
+      - mail_sender_postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=${POSTGRES_DATABASE}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    networks:
+      - mail_sender_network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER -d ${POSTGRES_DATABASE}" ]
+      interval: 5s
+      timeout: 20s
+      retries: 100
+
+  mail_sender_bot:
+    container_name: mail_sender_bot
+    build:
+      context: .
+      dockerfile: ${EMAIL_SENDER_DIR}/Dockerfile
+    command: make run_bot_tests
+    env_file:
+      - ./${ENV_FILENAME}
+    networks:
+      - mail_sender_network
+
+networks:
+  mail_sender_network:
+
+volumes:
+  mail_sender_postgres_data:

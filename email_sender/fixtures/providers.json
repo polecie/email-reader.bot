@@ -1,0 +1,65 @@
+[
+  {
+    "model": "api.mailprovider",
+    "pk": 1,
+    "fields": {
+      "name": "gmail.com",
+      "server": "imap.gmail.com",
+      "port": 993
+    }
+  },
+  {
+    "model": "api.mailprovider",
+    "pk": 2,
+    "fields": {
+      "name": "yandex.ru",
+      "server": "imap.yandex.ru",
+      "port": 993
+    }
+  },
+  {
+    "model": "api.mailprovider",
+    "pk": 3,
+    "fields": {
+      "name": "rambler.ru",
+      "server": "imap.rambler.ru",
+      "port": 993
+    }
+  },
+  {
+    "model": "api.mailprovider",
+    "pk": 4,
+    "fields": {
+      "name": "mail.ru",
+      "server": "imap.mail.ru",
+      "port": 993
+    }
+  },
+  {
+    "model": "api.mailprovider",
+    "pk": 5,
+    "fields": {
+      "name": "yahoo.com",
+      "server": "imap.mail.yahoo.com",
+      "port": 993
+    }
+  },
+  {
+    "model": "api.mailprovider",
+    "pk": 6,
+    "fields": {
+      "name": "outlook",
+      "server": "outlook.office365.com",
+      "port": 993
+    }
+  },
+  {
+    "model": "api.mailprovider",
+    "pk": 7,
+    "fields": {
+      "name": "iCloud mail",
+      "server": "imap.mail.me.com",
+      "port": 993
+    }
+  }
+]
